@@ -1,0 +1,25 @@
+<html>
+Go to <a href="https://github.com/rdp-studio/wenyan-book/releases/latest">This link</a> To Downnload.<br>
+<span><strong id="cnt-downloads"></strong> <span>downloads of<br> this release</span>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+    function humanise(n){
+      var d = ',';
+      var s = '.';
+      n = n.toString().split('.');
+      n[0] = n[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + d);
+      return n.join(s);
+    };
+
+    $(document).ready(function(){
+        $.getJSON("https://api.github.com/repos/rdp-studio/wenyan-book/releases/latest", function(json) {
+            var assetlist = json.assets;
+            total = 0;
+            $(assetlist).each(function(i, asset){
+                total += asset.download_count;
+            });
+            $('#cnt-downloads').html(humanise(total));
+        });
+    });
+    </script>
+</html>
